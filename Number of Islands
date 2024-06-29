@@ -35,6 +35,36 @@ Output:
 
 5
 ============================================================================
+def dfs(i,j,l):
+    if(i<0 or i>=len(l) or j<0 or j>=len(l[0]) or l[i][j] != 1):
+      return
+    l[i][j]=0
+    
+    dfs(i+1,j,l)
+    dfs(i+1,j-1,l)
+    dfs(i+1,j+1,l)
+    dfs(i-1,j,l)
+    dfs(i-1,j-1,l)
+    dfs(i-1,j+1,l)
+    dfs(i,j+1,l)
+    dfs(i,j-1,l)
+def fun(r,c,l):
+    count=0
+    
+    for i in range(r):
+      for j in range(c):
+        
+        if l[i][j] == 1:
+          dfs(i,j,l)
+          count += 1
+    return count  
+r,c=map(int,input().split())
+l=[]
+for i in range(r):
+  x=[int(i) for i in input().split()]
+  l.append(x)
+print(fun(r,c,l))
+=============================using class===========================================
 class Island:
   def dfs(self,i,j,l):
     if(i<0 or i>=len(l) or j<0 or j>=len(l[0]) or l[i][j] != 1):
@@ -67,3 +97,52 @@ for i in range(r):
 z = Island()
 
 print(z.fun(r,c,l))
+=================================using constructor to avoid the argument passing=============================================
+class Graph:
+    def __init__(self, row, col, graph):
+        self.ROW = row
+        self.COL = col
+        self.graph = graph
+    def DFS(self, i, j):
+        if (i < 0 or i >= len(self.graph) or
+            j < 0 or j >= len(self.graph[0]) or
+            self.graph[i][j] != 1):
+            return
+
+        # mark it as visited
+        self.graph[i][j] = 0
+
+        # Recur for 8 neighbours
+        self.DFS(i - 1, j - 1)
+        self.DFS(i - 1, j)
+        self.DFS(i - 1, j + 1)
+        self.DFS(i, j - 1)
+        self.DFS(i, j + 1)
+        self.DFS(i + 1, j - 1)
+        self.DFS(i + 1, j)
+        self.DFS(i + 1, j + 1)
+
+    def countIslands(self):
+        count = 0
+        for i in range(self.ROW):
+            for j in range(self.COL):
+                # If a cell with value 1 is not visited yet,
+                # then new island found
+                if self.graph[i][j] == 1:
+                    # Visit all cells in this island
+                    # and increment island count
+                    self.DFS(i, j)
+                    count += 1
+
+        return count
+
+
+r,c=map(int,input().split())
+l=[]
+for i in range(r):
+  x=[int(i) for i in input().split()]
+  l.append(x)
+
+g = Graph(r, c, l)
+
+print("Number of islands is:", g.countIslands())
