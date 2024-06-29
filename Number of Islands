@@ -1,0 +1,69 @@
+Number of Islands
+Given a matrix that consists of 1's and 0's, where 1 represents land and 0 represents water. The connected land surrounded by water is an island. The land can be connected in all 8 directions. Find the minimum of bridges required to connect all the Islands.
+
+
+
+Format:
+
+Input:
+
+The first line contains the size of the 2D matrix (N N - Represents an NxN matrix). The next line contains the elements of the 2D matrix.
+
+Output:
+
+The output consists of the number of islands.
+
+
+
+Example:
+
+Input:
+
+5 5
+
+1 1 0 0 0
+
+0 1 0 0 1
+
+1 0 0 1 1
+
+0 0 0 0 0
+
+1 0 1 1 0
+
+Output:
+
+5
+============================================================================
+class Island:
+  def dfs(self,i,j,l):
+    if(i<0 or i>=len(l) or j<0 or j>=len(l[0]) or l[i][j] != 1):
+      return
+    l[i][j]=0
+    
+    self.dfs(i+1,j,l)
+    self.dfs(i+1,j-1,l)
+    self.dfs(i+1,j+1,l)
+    self.dfs(i-1,j,l)
+    self.dfs(i-1,j-1,l)
+    self.dfs(i-1,j+1,l)
+    self.dfs(i,j+1,l)
+    self.dfs(i,j-1,l)
+  def fun(self,r,c,l):
+    count=0
+    
+    for i in range(r):
+      for j in range(c):
+        
+        if l[i][j] == 1:
+          self.dfs(i,j,l)
+          count += 1
+    return count  
+r,c=map(int,input().split())
+l=[]
+for i in range(r):
+  x=[int(i) for i in input().split()]
+  l.append(x)
+z = Island()
+
+print(z.fun(r,c,l))
