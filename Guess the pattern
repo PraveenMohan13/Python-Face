@@ -1,0 +1,55 @@
+guess the pattern
+Given an integer n, what will be the nth row of the following look-and-say pattern.
+
+1
+
+11
+
+21
+
+1211
+
+111221
+
+
+
+Constraints:
+
+1 <= n <= 30
+
+
+
+Example 1:
+
+Input:
+
+n = 5
+
+Output: 111221
+
+Explanation:
+
+The 5th row of the given pattern will be 111221.
+==========================================================================================
+def fun(n):
+    if (n == 1):
+        return "1"
+    if (n == 2):
+        return "11"
+    s = "11" 
+    for i in range(3, n + 1):
+        s += '$'
+        l = len(s)
+        c = 1 
+        t = "" 
+        for j in range(1 , l):
+            if (s[j] != s[j - 1]):
+                t += str(c)
+                t += s[j - 1]
+                c = 1
+            else:
+                c += 1
+        s = t
+    return s
+n=int(input())
+print(fun(n))
