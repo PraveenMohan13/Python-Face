@@ -1,0 +1,57 @@
+Sum of Numbers
+Given a string containing alphanumeric characters, calculate the sum of all numbers present in the string.
+
+
+
+Constraints:
+
+1<=S<=25
+
+
+
+Examples 1:
+
+Input:
+
+1abc23
+
+Output:
+
+24
+
+
+
+Example 2:
+
+Input:
+
+face360
+
+Output:
+
+360
+
+
+
+Example 3:
+
+Input:
+
+1abc2x30yz67
+
+Output:
+
+100
+=================================================================================================================
+s = input()
+t = 0
+ans=0
+for i in range(len(s)):
+  if(s[i].isdigit()):
+    t = t *10 + int(s[i])
+  else:
+    ans += t
+    t=0
+ans += t
+print(ans)
+    
