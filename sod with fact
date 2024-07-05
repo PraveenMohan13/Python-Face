@@ -1,0 +1,50 @@
+Repeatedly find the sum of digits of a number until it becomes a single-digit number (say sod). Then compute the factorial of sod and print it.
+
+Input Format
+
+One line containing an integer "n" denoting number
+
+Output Format
+
+One number denoting the factorial of single digit
+
+Constraints
+
+1-<=10000
+
+Sample Input
+
+23
+
+Sample Output
+120
+
+Sample Input
+8
+Sample Output
+40320
+
+Sample Input
+91
+Sample Output
+1
+===================================================================================================
+def sum(n):
+    while(n>9):
+        t=n
+        ans=0
+        while(t!=0):
+            ans = ans + int(t%10)
+            t=t/10
+        n=ans
+    return n
+def fact(n):
+    fact=1
+    for i in range(1,n+1):
+        fact *= i
+    return fact
+        
+n=int(input())
+ans_1 = sum(n)
+ans_2 = fact(ans_1)
+print(ans_2)
