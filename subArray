@@ -1,0 +1,7 @@
+l=[int(i)for i in input().split()]
+for i in range(len(l)):
+    for j in range(i,len(l)):
+        for k in range(i,j+1):
+            print(l[k],end=" ")
+        print()
+                
